@@ -56,11 +56,11 @@ app.on('ready', function () {
     const currentSettings = readSettings();
 
     mainWindow = new BrowserWindow({
-        width: 590,
-        height: 290,
+        width: 900,
+        height: 500,
         frame: false,
-        'min-width': 500,
-        'min-height': 200,
+        'min-width': 900,
+        'min-height': 500,
         'accept-first-mouse': true,
         'title-bar-style': 'hidden',
         webPreferences: {
@@ -118,7 +118,7 @@ function populateMods(settings) {
     try {
         if (settings.msm_directory == "") {
             mainWindow.webContents.executeJavaScript(`
-                document.getElementById("modList").innerHTML = '<li class="list-group-item" id="noMods" style="text-align: center;">' +
+                document.getElementById("modList").innerHTML = '<li class="list-group" id="noMods" style="text-align: center;">' +
                     '<h3>MSM directory not set</h3>' +
                     '<img src="https://images-ext-1.discordapp.net/external/d-EBv1nqbYspfTqKrMk796UXZ_5crvfHQ1Sa1040dE0/%3Fsize%3D128%26quality%3Dlossless/https/cdn.discordapp.com/emojis/1154955561943707720.webp?format=webp"/>' +
                 '</li>';
@@ -137,10 +137,10 @@ function populateMods(settings) {
         if (modsCount == 0) {
             logger.info()
             mainWindow.webContents.executeJavaScript(`
-                document.getElementById("modList").innerHTML = '<li class="list-group-item" id="noMods" style="text-align: center;">' +
+                document.getElementById("modList").innerHTML = '<li class="list-group" id="noMods" style="text-align: center;">' +
                     '<h3>No mods found</h3>' +
                     '<img src="https://images-ext-1.discordapp.net/external/d-EBv1nqbYspfTqKrMk796UXZ_5crvfHQ1Sa1040dE0/%3Fsize%3D128%26quality%3Dlossless/https/cdn.discordapp.com/emojis/1154955561943707720.webp?format=webp"/>' +
-                '</li>';
+                '</li>; ';
             `).catch(error => {
                 logger.error('Error executing JavaScript:', error.message);
             });
@@ -161,14 +161,16 @@ function populateMods(settings) {
                     document.getElementById("modList").innerHTML += \`
                     <li class="list-group-item">
                         <img class="img-circle media-object pull-left" src="${path.join(p, "icon.png").replaceAll(path.sep, "/")}" width="32" height="32">
-                        <div class="media-body">
-                            <div class="radio pull-right">
-                                <label>
-                                    <input type="checkbox" id="mods/${mod}"> &zwnj;
-                                </label>
-                            </div>
+                        <div class="media-body">     
+                            <div class="modtext">        
                             <strong>${data.title} (v${data.version}) - ${data.creator}</strong>
                             <p>${data.description}</p>
+                            </div>
+                        </div>
+                        <div class="radio pull-right">
+                            <label>
+                                <input type="checkbox" id="mods/${mod}"> &zwnj;
+                            </label>
                         </div>
                     </li>
                 \``);
@@ -247,29 +249,29 @@ ipcMain.on("toMain", function (event, args) {
         } else if (args[0] === "resetSettingsButton") {
             resetSettings();
             populateSettings(readSettings());
-        } else if (args[0] === "findTomlFolder"){
+        } else if (args[0] === "findTomlFolder") {
             dialog.showOpenDialog(mainWindow, {
                 'title': "Open Mod Directory",
                 'properties': [
                     'openDirectory'
                 ]
-            }).then((out) =>{
-                if(!out.canceled && out.filePaths[0] && fs.existsSync(out.filePaths[0])){
+            }).then((out) => {
+                if (!out.canceled && out.filePaths[0] && fs.existsSync(out.filePaths[0])) {
                     mainWindow.webContents.executeJavaScript(`document.getElementById("tomlModPathInput").value = "${out.filePaths[0].replaceAll(path.sep, "/")}"`)
                 }
             })
-        } else if(args[0] === "generateToml"){
+        } else if (args[0] === "generateToml") {
             toml.generate(args[1], args[2], args[3], args[4], args[5])
-        } else if(args[0] === "decompileLua") {
+        } else if (args[0] === "decompileLua") {
             lua.decompile(args[1])
-        } else if (args[0] === "findLuaFile"){
+        } else if (args[0] === "findLuaFile") {
             dialog.showOpenDialog(mainWindow, {
                 'title': "Open Lua File",
                 'properties': [
                     'openFile'
                 ]
-            }).then((out) =>{
-                if(!out.canceled && out.filePaths[0] && fs.existsSync(out.filePaths[0])){
+            }).then((out) => {
+                if (!out.canceled && out.filePaths[0] && fs.existsSync(out.filePaths[0])) {
                     mainWindow.webContents.executeJavaScript(`document.getElementById("luaFileInput").value = "${out.filePaths[0].replaceAll(path.sep, "/")}"`)
                 }
             })

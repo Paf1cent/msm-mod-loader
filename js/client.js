@@ -3,8 +3,6 @@ try {
     var settingsSection = document.getElementById("settingsList");
     var modSection = document.getElementById("modList");
     var toolsSection = document.getElementById("toolsList");
-    var selectModButtons = document.getElementById("selectModButtons");
-    var settingsSaveButtons = document.getElementById("settingsSaveButtons");
 
     function getCheckBoxes(section, checkIfChecked) {
         var checkBoxes = section.getElementsByTagName('input');
@@ -21,9 +19,8 @@ try {
         return returnVal
     }
 
-    //Animation
     var settingOption = 0;
-    var settingsOptions = Array.from(settingsSection.children[0].children);
+    var settingsOptions = Array.from(settingsSection.children);
     settingsOptions.forEach(function (e) {
         settingOption += 1;
         e.style.transform = "translateY(100%)";
@@ -58,39 +55,24 @@ try {
         settingsSection.style.display = "none";
         modSection.style.display = "block";
         toolsSection.style.display = "none";
-        selectModButtons.style.display = "block";
-        settingsSaveButtons.style.display = "none";
+        document.getElementById("selectButtons").style.display = "flex";
+        document.getElementById("resetButtons").style.display = "none";
     });
     document.getElementById("toolsButton").addEventListener("click", function () {
         settingsSection.style.display = "none";
         modSection.style.display = "none";
         toolsSection.style.display = "block";
-        selectModButtons.style.display = "none";
-        settingsSaveButtons.style.display = "none";
+        document.getElementById("selectButtons").style.display = "none";
+        document.getElementById("resetButtons").style.display = "none";
     });
     document.getElementById("settingsButton").addEventListener("click", function () {
         settingsSection.style.display = "block";
         modSection.style.display = "none";
         toolsSection.style.display = "none";
-        selectModButtons.style.display = "none";
-        settingsSaveButtons.style.display = "block";
+        document.getElementById("selectButtons").style.display = "none";
+        document.getElementById("resetButtons").style.display = "flex";
     });
 
-    //Dropdown
-    var dropdownActive = false;
-    var dropdownContent = document.getElementById("dropdowncontent");
-    function dropDown() {
-        if (!dropdownActive) {
-            dropdownContent.style.display = "block";
-            dropdownActive = true;
-        }
-        else {
-            dropdownContent.style.display = "none";
-            dropdownActive = false;
-        }
-    }
-
-    //Footer
     document.getElementById("exitButton").addEventListener("click", function () {
         window.api.send("toMain", ["exitClicked"]);
     });

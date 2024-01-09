@@ -1,0 +1,458 @@
+@charset "UTF-8";
+
+* {
+    overflow: hidden;
+    background: none;
+}
+
+body {
+    background: black;
+}
+
+@font-face {
+    font-family: 'Lexend Deca';
+    src: url('../fonts/LexendDeca.ttf');
+}
+
+.window {
+    outline: 2px black solid;
+    height: 500px;
+}
+
+#exitButton {
+    border-left: 1px solid #28292D;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+    font-size: 35px;
+    transition: 0.2s;
+}
+
+#exitButton:hover {
+    background-color: red;
+}
+
+.actionbar {
+    border: 1px solid #28292D;
+    border-bottom: none;
+    color: white;
+    background-color: #181920;
+    display: flex;
+    height: 35px;
+    width: 100%;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.actionbar .text h3 {
+    font-size: 21px;
+    font-weight: 200;
+    margin: 3px 8px;
+    font-family: Lexend Deca;
+}
+
+.actionbar .text h3 b {
+    font-weight: 400;
+}
+
+.actionbar .text {
+    display: flex;
+    border-right: 1px solid #28292D;
+}
+
+.content {
+    height: 465px;
+    border: 1px solid #28292D;
+    background: #151517;
+    display: flex;
+}
+
+.verticalHeader {
+    display: flex;
+    border-right: 1px solid #28292D;
+    flex: 1;
+    flex-direction: column;
+}
+
+.headerButton {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-family: Lexend Deca;
+    font-weight: 200;
+    margin: 5px;
+    margin-top: 0;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #181920;
+    border: 1px solid #28292D;
+    color: white;
+    transition: 0.2s;
+}
+
+.headerButton:hover {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+}
+
+.verticalHeader i {
+    font-size: 20px;
+    padding: 3px 8px 3px 8px;
+    margin-right: 8px;
+    border-right: 1px solid;
+    border-color: inherit;
+    color: white;
+}
+
+.headerButton:first-child {
+    margin-top: 5px;
+}
+
+.headerbuttons {
+    border-bottom: 1px solid #28292D;
+    border-radius: 8px;
+}
+
+.headerbottom {
+    border-top: 1px solid #28292D;
+    margin-top: auto;
+}
+
+#resetDataFolder {
+    cursor: not-allowed;
+    margin: 2px;
+    border-radius: 8px;
+    color: white;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    transition: 0.2s;
+    font-weight: 200;
+    padding: 4px 12px;
+}
+
+#generateToml,
+#decompileLua {
+    cursor: pointer;
+    margin: 2px;
+    border-radius: 8px;
+    color: white;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    transition: 0.2s;
+    font-weight: 200;
+    padding: 4px 12px;
+}
+
+#generateToml:hover,
+#decompileLua:hover {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+#pathLabel {
+    display: inline;
+    width: 320px;
+    background-color: #181920;
+    border: 1px solid #28292D;
+    box-shadow: none;
+    transition: 0.2s;
+    color: white;
+    font-weight: 300;
+}
+
+.form-group input {
+    margin: 2px;
+    display: inline-block;
+    transition: 0.2s;
+    box-shadow: none;
+    font-weight: 300;
+    background-color: #181920;
+    border: 1px solid #28292D;
+    color: white;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.form-group input:hover {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+}
+
+.form-group input:focus {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+    color: white;
+}
+
+#findMSMButton {
+    font-weight: 300;
+    background-color: #181920;
+    border: 1px solid #28292D;
+    color: #767b86;
+    border-radius: 0.375rem;
+    height: 38px;
+    width: fit-content;
+    transition: 0.2s;
+}
+
+#findMSMButton i {
+    margin: 0 3px 0 3px;
+}
+
+#findMSMButton:hover {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+}
+
+#findTomlFolder i,
+#findLuaFile i {
+    margin: 0 3px 0 3px;
+}
+
+#findTomlFolder,
+#findLuaFile {
+    margin-left: 2px;
+    font-weight: 300;
+    background-color: #181920;
+    border: 1px solid #28292D;
+    color: #767b86;
+    border-radius: 0.375rem;
+    height: 38px;
+    width: fit-content;
+    transition: 0.2s;
+}
+
+#findTomlFolder:hover,
+#findLuaFile:hover {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+}
+
+::placeholder {
+    color: #46474e !important;
+    font-weight: 300;
+    opacity: 1;
+}
+
+#pathLabel:hover {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+}
+
+#pathLabel:focus {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+}
+
+#modList,
+#settingsList,
+#toolsList {
+    padding: 12px 20px;
+    color: white;
+    font-family: Lexend Deca;
+    font-weight: 200;
+    display: inline;
+}
+
+.contents {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+::-webkit-scrollbar-track {
+    background: #181920;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #28292D;
+}
+
+.checkbox label {
+    user-select: none;
+    cursor: pointer;
+    padding: 5px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: 0.2s;
+}
+
+.checkbox label:hover {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.checkbox label input {
+    cursor: pointer;
+}
+
+#settingsList h3,
+#modList h3,
+#toolList h3 {
+    user-select: none;
+    font-weight: 400;
+}
+
+@keyframes moveAnimation {
+    0% {
+        transform: translateY(50%);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+}
+
+@keyframes moveSettingsAnimation {
+    0% {
+        transform: translateY(100%);
+        opacity: 0%;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 100%;
+    }
+}
+
+@keyframes fadeAnimation {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+.headerbuttons1 {
+    margin: 5px;
+    display: flex;
+}
+
+.headerbuttons2,
+.headerbuttons3 {
+    margin: 5px;
+    padding: 7px;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.headerbottom button {
+    border-radius: 8px;
+    margin: 2px 3px;
+    font-family: Lexend Deca;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+}
+
+.headerbottom button i {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#launchButton {
+    background: #4F6F52;
+    border: 1px solid #86A789;
+    color: #D2E3C8;
+    transition: 0.2s;
+}
+
+#refreshButton {
+    background: #5c5f91;
+    border: 1px solid #95abbb;
+    color: #ddc8e3;
+    transition: 0.2s;
+}
+
+#selectButton,
+#deselectButton {
+    background: #181920;
+    border: 1px solid #28292D;
+    color: white;
+    transition: 0.2s;
+    font-weight: 200;
+}
+
+#resetSettingsButton {
+    background: #181920;
+    border: 1px solid #28292D;
+    color: white;
+    transition: 0.2s;
+    font-weight: 200;
+}
+
+#resetSettingsButton:hover,
+#selectButton:hover,
+#deselectButton:hover {
+    background-color: #1f2029;
+    border: 1px solid #46474e;
+}
+
+
+.img-circle {
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.06);
+    margin: 6px;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    padding: 3px;
+    transform: scale(130%);
+}
+
+#modList .list-group-item {
+    width: fit-content;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    margin: 4px 2px;
+    padding: 2px;
+    display: flex;
+}
+
+.list-group {
+    display: flex;
+    align-items: center;
+    height: auto;
+}
+
+.list-group img {
+    max-width: 37%;
+    max-height: 37%;
+}
+
+.media-body {
+    display: flex;
+}
+
+.media-body p {
+    margin: 0;
+    line-break: anywhere;
+    max-width: 590px;
+}
+
+.list-group-item .radio {
+    margin: 0 12px;
+    display: flex;
+    align-items: center;
+}
